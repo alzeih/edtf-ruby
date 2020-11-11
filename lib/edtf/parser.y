@@ -2,7 +2,7 @@
 
 class EDTF::Parser
 
-token T Z E X U UNKNOWN OPEN LONGYEAR UNMATCHED DOTS UA PUA
+token T Z E U UNKNOWN OPEN LONGYEAR UNMATCHED DOTS UA PUA
 
 expect 0
 
@@ -186,7 +186,6 @@ rule
                      | partial_unspecified
                      | choice_list
                      | inclusive_list
-                     | masked_precision
                      | date_and_calendar
                      | long_year_scientific
                      ;
@@ -212,21 +211,6 @@ rule
 
 
   date_and_calendar : date '^' { result = val[0]; result.calendar = val[1] }
-
-
-  masked_precision :
-    digit digit digit X
-    {
-      d = val[0,3].zip([1000,100,10]).reduce(0) { |s,(a,b)| s += a * b }
-      result = EDTF::Decade.new(d)
-    }
-    | digit digit X X
-    {
-      d = val[0,2].zip([1000,100]).reduce(0) { |s,(a,b)| s += a * b }
-      result = EDTF::Century.new(d)
-    }
-    ;
-
 
   choice_list : '[' list ']'   { result = val[1].choice! }
 
@@ -535,8 +519,6 @@ require 'strscan'
       [:UNKNOWN, :unknown]
     when @src.scan(/u/)
       [:U, @src.matched]
-    when @src.scan(/x/i)
-      [:X, @src.matched]
     when @src.scan(/y/)
       [:LONGYEAR, @src.matched]
     when @src.scan(/e/)

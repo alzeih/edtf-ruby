@@ -115,19 +115,7 @@ module EDTF
       it 'parses negative scientific long years' do
         expect(Parser.new.parse('y-17e7').year).to eq(-170000000)        
       end
-      
-      it 'parses masked precision date strings (decades)' do
-        d = Parser.new.parse!('198x')
-        expect(d).to be_cover(Date.new(1983,3,12))
-        expect(d).not_to be_cover(Date.new(1990,1,1))
-      end
 
-      it 'parses masked precision date strings (centuries)' do
-        d = Parser.new.parse!('18xx')
-        expect(d).to be_cover(Date.new(1848,1,14))
-        expect(d).not_to be_cover(Date.new(1799,12,31))
-      end
-      
       it 'parses multiple dates (years)' do
         d = Parser.new.parse!('{1667,1668, 1670..1672}')
         expect(d.map(&:year)).to eq([1667,1668,1670,1671,1672])
