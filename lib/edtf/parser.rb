@@ -97,9 +97,9 @@ module_eval(<<'...end parser.y/module_eval...', 'parser.y', 437)
       [:UNKNOWN, :unknown]
     when @src.scan(/X/)
       [:X, @src.matched]
-    when @src.scan(/y/)
+    when @src.scan(/Y/)
       [:LONGYEAR, @src.matched]
-    when @src.scan(/e/)
+    when @src.scan(/E/)
       [:E, @src.matched]
     when @src.scan(/\+/)
       ['+', @src.matched]

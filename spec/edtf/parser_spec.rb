@@ -72,11 +72,11 @@ module EDTF
       end
       
       it 'parses positive long years' do
-        expect(Parser.new.parse('y170000002').year).to eq(170000002)
+        expect(Parser.new.parse('Y170000002').year).to eq(170000002)
       end
       
       it 'parses negative long years' do
-        expect(Parser.new.parse('y-170000002').year).to eq(-170000002)
+        expect(Parser.new.parse('Y-170000002').year).to eq(-170000002)
       end
       
       it 'parses season codes' do
@@ -109,11 +109,11 @@ module EDTF
 			
 			
       it 'parses positive scientific long years' do
-        expect(Parser.new.parse('y17e7').year).to eq(170000000)
+        expect(Parser.new.parse('Y17E7').year).to eq(170000000)
       end
       
       it 'parses negative scientific long years' do
-        expect(Parser.new.parse('y-17e7').year).to eq(-170000000)        
+        expect(Parser.new.parse('Y-17E7').year).to eq(-170000000)
       end
 
       it 'parses multiple dates (years)' do
