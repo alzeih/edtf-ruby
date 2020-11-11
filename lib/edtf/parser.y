@@ -2,7 +2,7 @@
 
 class EDTF::Parser
 
-token T Z E U UNKNOWN OPEN LONGYEAR UNMATCHED DOTS UA PUA
+token T Z E X UNKNOWN OPEN LONGYEAR UNMATCHED DOTS UA PUA
 
 expect 0
 
@@ -91,7 +91,7 @@ rule
   # NB: Uncertain/approximate Dates are covered by the Level 2 rules
   level_1_expression : unknown | unspecified | level_1_interval | long_year_simple | season
 
-  unknown : U U U U { result = EDTF::Unknown.new }
+  unknown : X X X X { result = EDTF::Unknown.new }
 
   # uncertain_or_approximate_date : date UA { result = uoa(val[0], val[1]) }
 
@@ -113,25 +113,25 @@ rule
                    }
 
   positive_unspecified_year :
-    digit digit digit U
+    digit digit digit X
     {
       result = [val[0,3].zip([1000,100,10]).reduce(0) { |s,(a,b)| s += a * b }, [false,true]]
     }
-    | digit digit U U
+    | digit digit X X
     {
       result = [val[0,2].zip([1000,100]).reduce(0) { |s,(a,b)| s += a * b }, [true, true]]
     }
 
-  unspecified_month : year '-' U U {
+  unspecified_month : year '-' X X {
     result = Date.new(val[0]).unspecified!(:month)
     result.precision = :month
   }
 
-  unspecified_day : year_month '-' U U {
+  unspecified_day : year_month '-' X X {
     result = Date.new(*val[0]).unspecified!(:day)
   }
 
-  unspecified_day_and_month : year '-' U U '-' U U {
+  unspecified_day_and_month : year '-' X X '-' X X {
     result = Date.new(val[0]).unspecified!([:day,:month])
   }
 
@@ -262,25 +262,25 @@ rule
       result.month_precision!
       result.unspecified.year[2,2] = val[0][1]
     }
-    | unspecified_year '-' U U '-' day
+    | unspecified_year '-' X X '-' day
     {
       result = Date.new(val[0][0], 1, val[5])
       result.unspecified.year[2,2] = val[0][1]
       result.unspecified!(:month)
     }
-    | unspecified_year '-' U U '-' U U
+    | unspecified_year '-' X X '-' X X
     {
       result = Date.new(val[0][0], 1, 1)
       result.unspecified.year[2,2] = val[0][1]
       result.unspecified!([:month, :day])
     }
-    | unspecified_year '-' month '-' U U
+    | unspecified_year '-' month '-' X X
     {
       result = Date.new(val[0][0], val[2], 1)
       result.unspecified.year[2,2] = val[0][1]
       result.unspecified!(:day)
     }
-    | year '-' U U '-' day
+    | year '-' X X '-' day
     {
       result = Date.new(val[0], 1, val[5])
       result.unspecified!(:month)
@@ -517,8 +517,8 @@ require 'strscan'
       [:OPEN, :open]
     when @src.scan(/unkn?own/i) # matches 'unkown' typo too
       [:UNKNOWN, :unknown]
-    when @src.scan(/u/)
-      [:U, @src.matched]
+    when @src.scan(/X/)
+      [:X, @src.matched]
     when @src.scan(/y/)
       [:LONGYEAR, @src.matched]
     when @src.scan(/e/)

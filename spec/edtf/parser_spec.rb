@@ -47,14 +47,14 @@ module EDTF
       end
 
       it 'parses unspecified dates' do
-        expect(Parser.new.parse('199u')).to be_unspecified
-        expect(Parser.new.parse('1999-uu-uu')).to be_unspecified
-        expect(Parser.new.parse('199u-01')).to be_unspecified
+        expect(Parser.new.parse('199X')).to be_unspecified
+        expect(Parser.new.parse('1999-XX-XX')).to be_unspecified
+        expect(Parser.new.parse('199X-01')).to be_unspecified
       end
 
       it 'parses negative unspecified dates' do
-        expect(Parser.new.parse('-199u')).to be_unspecified
-        expect(Parser.new.parse('-1999-uu-uu')).to be_unspecified
+        expect(Parser.new.parse('-199X')).to be_unspecified
+        expect(Parser.new.parse('-1999-XX-XX')).to be_unspecified
       end
 
       it 'parses open intervals' do
@@ -146,49 +146,49 @@ module EDTF
         expect(d.length).to eq(3)
       end
       
-      it 'parses intern unspecified "199u-01-01"' do
-        expect(Parser.new.parse!('199u-01-01').unspecified.to_s).to eq('sssu-ss-ss')
+      it 'parses intern unspecified "199X-01-01"' do
+        expect(Parser.new.parse!('199X-01-01').unspecified.to_s).to eq('sssu-ss-ss')
       end
       
-      it 'parses intern unspecified "19uu-01-01"' do
-        expect(Parser.new.parse!('19uu-01-01').unspecified.to_s).to eq('ssuu-ss-ss')
+      it 'parses intern unspecified "19XX-01-01"' do
+        expect(Parser.new.parse!('19XX-01-01').unspecified.to_s).to eq('ssuu-ss-ss')
       end
 
-      it 'parses intern unspecified "199u-uu-01"' do
-        expect(Parser.new.parse!('199u-uu-01').unspecified.to_s).to eq('sssu-uu-ss')
+      it 'parses intern unspecified "199X-XX-01"' do
+        expect(Parser.new.parse!('199X-XX-01').unspecified.to_s).to eq('sssu-uu-ss')
       end
       
-      it 'parses intern unspecified "19uu-uu-01"' do
-        expect(Parser.new.parse!('19uu-uu-01').unspecified.to_s).to eq('ssuu-uu-ss')
+      it 'parses intern unspecified "19XX-XX-01"' do
+        expect(Parser.new.parse!('19XX-XX-01').unspecified.to_s).to eq('ssuu-uu-ss')
       end
 
-      it 'parses intern unspecified "199u-uu-uu"' do
-        expect(Parser.new.parse!('199u-uu-uu').unspecified.to_s).to eq('sssu-uu-uu')
+      it 'parses intern unspecified "199X-XX-XX"' do
+        expect(Parser.new.parse!('199X-XX-XX').unspecified.to_s).to eq('sssu-uu-uu')
       end
       
-      it 'parses intern unspecified "19uu-uu-uu"' do
-        expect(Parser.new.parse!('19uu-uu-uu').unspecified.to_s).to eq('ssuu-uu-uu')
+      it 'parses intern unspecified "19XX-XX-XX"' do
+        expect(Parser.new.parse!('19XX-XX-XX').unspecified.to_s).to eq('ssuu-uu-uu')
       end
 
-      it 'parses intern unspecified "199u-01-uu"' do
-        expect(Parser.new.parse!('199u-01-uu').unspecified.to_s).to eq('sssu-ss-uu')
+      it 'parses intern unspecified "199X-01-XX"' do
+        expect(Parser.new.parse!('199X-01-XX').unspecified.to_s).to eq('sssu-ss-uu')
       end
       
-      it 'parses intern unspecified "19uu-01-uu"' do
-        expect(Parser.new.parse!('19uu-01-uu').unspecified.to_s).to eq('ssuu-ss-uu')
+      it 'parses intern unspecified "19XX-01-XX"' do
+        expect(Parser.new.parse!('19XX-01-XX').unspecified.to_s).to eq('ssuu-ss-uu')
       end
 
-      it 'parses intern unspecified "1999-uu-01"' do
-        expect(Parser.new.parse!('1999-uu-01').unspecified.to_s).to eq('ssss-uu-ss')
+      it 'parses intern unspecified "1999-XX-01"' do
+        expect(Parser.new.parse!('1999-XX-01').unspecified.to_s).to eq('ssss-uu-ss')
       end
 
-      it 'parses intern unspecified "2004-06-uu"' do
-        expect(Parser.new.parse!('2004-06-uu').unspecified.to_s).to eq('ssss-ss-uu')
+      it 'parses intern unspecified "2004-06-XX"' do
+        expect(Parser.new.parse!('2004-06-XX').unspecified.to_s).to eq('ssss-ss-uu')
       end
 
       
-			it 'parses internal unspecified interval  "2004-06-uu/2004-07-03"' do
-				expect(Parser.new.parse!('2004-06-uu/2004-07-03').from).to eq(Date.new(2004,6,1))
+			it 'parses internal unspecified interval  "2004-06-XX/2004-07-03"' do
+				expect(Parser.new.parse!('2004-06-XX/2004-07-03').from).to eq(Date.new(2004,6,1))
 			end
 			
 			it 'parses "2004?-06-11": uncertain year; month, day known' do

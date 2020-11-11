@@ -95,8 +95,8 @@ module_eval(<<'...end parser.y/module_eval...', 'parser.y', 437)
       [:OPEN, :open]
     when @src.scan(/unkn?own/i) # matches 'unkown' typo too
       [:UNKNOWN, :unknown]
-    when @src.scan(/u/)
-      [:U, @src.matched]
+    when @src.scan(/X/)
+      [:X, @src.matched]
     when @src.scan(/y/)
       [:LONGYEAR, @src.matched]
     when @src.scan(/e/)
@@ -642,7 +642,7 @@ racc_token_table = {
   :T => 2,
   :Z => 3,
   :E => 4,
-  :U => 5,
+  :X => 5,
   :UNKNOWN => 6,
   :OPEN => 7,
   :LONGYEAR => 8,
@@ -700,7 +700,7 @@ Racc_token_to_s_table = [
   "T",
   "Z",
   "E",
-  "U",
+  "X",
   "UNKNOWN",
   "OPEN",
   "LONGYEAR",
