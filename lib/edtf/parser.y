@@ -140,9 +140,9 @@ rule
     result = Interval.new(val[0], val[2])
   }
 
-  level_1_start : date | partial_uncertain_or_approximate | unspecified | partial_unspecified | UNKNOWN
+  level_1_start : date | partial_uncertain_or_approximate | unspecified | partial_unspecified | UNKNOWN | OPEN
 
-  level_1_end : level_1_start | OPEN
+  level_1_end : level_1_start
 
 
   long_year_simple :

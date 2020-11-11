@@ -5,6 +5,7 @@ module EDTF
       let(:interval) { Date.edtf('2008/2011') }
 
 			it { expect(interval).not_to be_open }
+			it { expect(interval).not_to be_open_start }
 			it { expect(interval).not_to be_open_end }
 			it { expect(interval).not_to be_unknown_start }
 			it { expect(interval).not_to be_unknown_end }
@@ -80,6 +81,7 @@ module EDTF
 
       it { expect(interval).to be_open }
       it { expect(interval).to be_open_end }
+      it { expect(interval).not_to be_open_start }
       it { expect(interval).not_to be_unknown }
       it { expect(interval).not_to be_unknown_start }
       it { expect(interval).not_to be_unknown_end }
@@ -102,6 +104,70 @@ module EDTF
 
       it 'covers 2023-07-02' do
         expect(interval).to be_cover(Date.new(2023,07,02))
+      end
+
+    end
+
+    describe 'the interval open/2008-08-23' do
+      let(:interval) { Date.edtf('open/2008-08-23') }
+
+      it { expect(interval).to be_open }
+      it { expect(interval).to be_open_start }
+      it { expect(interval).not_to be_open_end }
+      it { expect(interval).not_to be_unknown }
+      it { expect(interval).not_to be_unknown_start }
+      it { expect(interval).not_to be_unknown_end }
+
+      it 'the min date is nil' do
+        expect(interval.min).to be nil
+      end
+
+      it 'the max date is 2008-08-23' do
+        expect(interval.max).to eq(Date.new(2008,8,23))
+      end
+
+      it 'includes christmas day 2007' do
+        expect(interval).to be_include(Date.new(2007,12,24))
+      end
+
+      it 'covers christmas day 2007' do
+        expect(interval).to be_cover(Date.new(2007,12,24))
+      end
+
+      it 'covers 1923-07-02' do
+        expect(interval).to be_cover(Date.new(1923,07,02))
+      end
+
+    end
+
+    describe 'the interval open/open' do
+      let(:interval) { Date.edtf('open/open') }
+
+      it { expect(interval).to be_open }
+      it { expect(interval).to be_open_start }
+      it { expect(interval).to be_open_end }
+      it { expect(interval).not_to be_unknown }
+      it { expect(interval).not_to be_unknown_start }
+      it { expect(interval).not_to be_unknown_end }
+
+      it 'the min date is nil' do
+        expect(interval.min).to be nil
+      end
+
+      it 'the max date is nil' do
+        expect(interval.max).to be nil
+      end
+
+      it 'includes christmas day 2007' do
+        expect(interval).to be_include(Date.new(2007,12,24))
+      end
+
+      it 'covers christmas day 2007' do
+        expect(interval).to be_cover(Date.new(2007,12,24))
+      end
+
+      it 'covers 1923-07-02' do
+        expect(interval).to be_cover(Date.new(1923,07,02))
       end
 
     end
@@ -150,12 +216,6 @@ module EDTF
       it '2007/2009 should be equal to 2007/2009' do
         expect(Date.edtf('2007/2009')).to eq(Date.edtf('2007/2009'))
       end
-    end
-
-    it 'may not have an open start' do
-      expect(
-        proc { Interval.new(:open, Date.today) }
-      ).to raise_error(ArgumentError)
     end
   end
 end
