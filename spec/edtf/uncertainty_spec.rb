@@ -120,7 +120,7 @@ module EDTF
       
       it 'allows you to set individual offsets' do
         u.year[1] = true
-        expect(u.to_s).to eq('suss-ss-ss')
+        expect(u.to_s).to eq('sXss-ss-ss')
       end
     end
     
@@ -129,24 +129,24 @@ module EDTF
         expect(u.to_s).to eq('ssss-ss-ss')
       end
       
-      it 'should return "ssss-ss-uu" if the day is unspecified' do
-        expect(u.unspecified!(:day).to_s).to eq('ssss-ss-uu')
+      it 'should return "ssss-ss-XX" if the day is unspecified' do
+        expect(u.unspecified!(:day).to_s).to eq('ssss-ss-XX')
       end
 
       it 'should return "ssss-uu-ss" if the month is unspecified' do
-        expect(u.unspecified!(:month).to_s).to eq('ssss-uu-ss')
+        expect(u.unspecified!(:month).to_s).to eq('ssss-XX-ss')
       end
 
-      it 'should return "ssss-uu-uu" if month and day are unspecified' do
-        expect(u.unspecified!([:day, :month]).to_s).to eq('ssss-uu-uu')
+      it 'should return "ssss-XX-XX" if month and day are unspecified' do
+        expect(u.unspecified!([:day, :month]).to_s).to eq('ssss-XX-XX')
       end
 
-      it 'should return "uuuu-ss-ss" if the year is unspecified' do
-        expect(u.unspecified!(:year).to_s).to eq('uuuu-ss-ss')
+      it 'should return "XXXX-ss-ss" if the year is unspecified' do
+        expect(u.unspecified!(:year).to_s).to eq('XXXX-ss-ss')
       end
 
-      it 'should return "uuuu-uu-uu" if the date is unspecified' do
-        expect(u.unspecified!.to_s).to eq('uuuu-uu-uu')
+      it 'should return "XXXX-XX-XX" if the date is unspecified' do
+        expect(u.unspecified!.to_s).to eq('XXXX-XX-XX')
       end
       
     end
@@ -170,7 +170,7 @@ module EDTF
 					before(:each) { u.year[3] = true }
 					
 					it 'should return the array with the year and the fourth digit masked' do
-						expect(u.mask(date)).to eq(['199u'])
+						expect(u.mask(date)).to eq(['199X'])
 					end
 					
 				end
@@ -179,7 +179,7 @@ module EDTF
 					before(:each) { u.year[2,2] = [true,true] }
 					
 					it 'should return the array with the year and the third and fourth digit masked' do
-						expect(u.mask(date)).to eq(['19uu'])
+						expect(u.mask(date)).to eq(['19XX'])
 					end
 					
 				end
@@ -197,7 +197,7 @@ module EDTF
           before(:each) { u.year[3] = true }
           
           it 'should return the array with the year and the fourth digit masked' do
-            expect(u.mask(date)).to eq(['-199u'])
+            expect(u.mask(date)).to eq(['-199X'])
           end      
         end
 
@@ -205,7 +205,7 @@ module EDTF
           before(:each) { u.year[2,2] = [true,true] }
           
           it 'should return the array with the year and the third and fourth digit masked' do
-            expect(u.mask(date)).to eq(['-19uu'])
+            expect(u.mask(date)).to eq(['-19XX'])
           end
           
         end
@@ -222,14 +222,14 @@ module EDTF
 					before(:each) { u.year[3] = true }
 					
 					it 'should return the array with the year and the fourth digit masked' do
-						expect(u.mask(date)).to eq(['199u', '01'])
+						expect(u.mask(date)).to eq(['199X', '01'])
 					end
 					
 					context 'when the month is unspecified' do
 						before(:each) { u.unspecified! :month }
 
 						it 'should return the array with the month masked' do
-							expect(u.mask(date)).to eq(['199u', 'uu'])
+							expect(u.mask(date)).to eq(['199X', 'XX'])
 						end		
 					end
 				end
@@ -238,14 +238,14 @@ module EDTF
 					before(:each) { u.year[2,2] = [true,true] }
 					
 					it 'should return the array with the year and the third and fourth digit masked' do
-						expect(u.mask(date)).to eq(['19uu', '01'])
+						expect(u.mask(date)).to eq(['19XX', '01'])
 					end
 					
 					context 'when the month is unspecified' do
 						before(:each) { u.unspecified! :month }
 
 						it 'should return the array with the month masked' do
-							expect(u.mask(date)).to eq(['19uu', 'uu'])
+							expect(u.mask(date)).to eq(['19XX', 'XX'])
 						end		
 					end			
 				end
@@ -254,7 +254,7 @@ module EDTF
 					before(:each) { u.unspecified! :month }
 					
 					it 'should return the array with the month masked' do
-						expect(u.mask(date)).to eq(['1994', 'uu'])
+						expect(u.mask(date)).to eq(['1994', 'XX'])
 					end		
 				end				
 
@@ -271,21 +271,21 @@ module EDTF
 					before(:each) { u.year[3] = true }
 					
 					it 'should return the array with the year and the fourth digit masked' do
-						expect(u.mask(date)).to eq(['199u', '01', '27'])
+						expect(u.mask(date)).to eq(['199X', '01', '27'])
 					end
 					
 					context 'when the month is unspecified' do
 						before(:each) { u.unspecified! :month }
 
 						it 'should return the array with the month masked' do
-							expect(u.mask(date)).to eq(['199u', 'uu', '27'])
+							expect(u.mask(date)).to eq(['199X', 'XX', '27'])
 						end		
 						
 						context 'when the day is unspecified' do
 							before(:each) { u.unspecified! :day }
 
 							it 'should return the array with the month masked' do
-								expect(u.mask(date)).to eq(['199u', 'uu', 'uu'])
+								expect(u.mask(date)).to eq(['199X', 'XX', 'XX'])
 							end		
 						end
 					end

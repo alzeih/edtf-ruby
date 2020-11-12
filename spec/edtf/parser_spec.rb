@@ -147,43 +147,43 @@ module EDTF
       end
       
       it 'parses intern unspecified "199X-01-01"' do
-        expect(Parser.new.parse!('199X-01-01').unspecified.to_s).to eq('sssu-ss-ss')
+        expect(Parser.new.parse!('199X-01-01').unspecified.to_s).to eq('sssX-ss-ss')
       end
       
       it 'parses intern unspecified "19XX-01-01"' do
-        expect(Parser.new.parse!('19XX-01-01').unspecified.to_s).to eq('ssuu-ss-ss')
+        expect(Parser.new.parse!('19XX-01-01').unspecified.to_s).to eq('ssXX-ss-ss')
       end
 
       it 'parses intern unspecified "199X-XX-01"' do
-        expect(Parser.new.parse!('199X-XX-01').unspecified.to_s).to eq('sssu-uu-ss')
+        expect(Parser.new.parse!('199X-XX-01').unspecified.to_s).to eq('sssX-XX-ss')
       end
       
       it 'parses intern unspecified "19XX-XX-01"' do
-        expect(Parser.new.parse!('19XX-XX-01').unspecified.to_s).to eq('ssuu-uu-ss')
+        expect(Parser.new.parse!('19XX-XX-01').unspecified.to_s).to eq('ssXX-XX-ss')
       end
 
       it 'parses intern unspecified "199X-XX-XX"' do
-        expect(Parser.new.parse!('199X-XX-XX').unspecified.to_s).to eq('sssu-uu-uu')
+        expect(Parser.new.parse!('199X-XX-XX').unspecified.to_s).to eq('sssX-XX-XX')
       end
       
       it 'parses intern unspecified "19XX-XX-XX"' do
-        expect(Parser.new.parse!('19XX-XX-XX').unspecified.to_s).to eq('ssuu-uu-uu')
+        expect(Parser.new.parse!('19XX-XX-XX').unspecified.to_s).to eq('ssXX-XX-XX')
       end
 
       it 'parses intern unspecified "199X-01-XX"' do
-        expect(Parser.new.parse!('199X-01-XX').unspecified.to_s).to eq('sssu-ss-uu')
+        expect(Parser.new.parse!('199X-01-XX').unspecified.to_s).to eq('sssX-ss-XX')
       end
       
       it 'parses intern unspecified "19XX-01-XX"' do
-        expect(Parser.new.parse!('19XX-01-XX').unspecified.to_s).to eq('ssuu-ss-uu')
+        expect(Parser.new.parse!('19XX-01-XX').unspecified.to_s).to eq('ssXX-ss-XX')
       end
 
       it 'parses intern unspecified "1999-XX-01"' do
-        expect(Parser.new.parse!('1999-XX-01').unspecified.to_s).to eq('ssss-uu-ss')
+        expect(Parser.new.parse!('1999-XX-01').unspecified.to_s).to eq('ssss-XX-ss')
       end
 
       it 'parses intern unspecified "2004-06-XX"' do
-        expect(Parser.new.parse!('2004-06-XX').unspecified.to_s).to eq('ssss-ss-uu')
+        expect(Parser.new.parse!('2004-06-XX').unspecified.to_s).to eq('ssss-ss-XX')
       end
 
       
