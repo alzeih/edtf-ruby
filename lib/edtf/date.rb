@@ -9,7 +9,7 @@ class Date
     :uncertain   => '?',
     :approximate => '~',
     :calendar    => '^',
-    :unspecified => 'u'
+    :unspecified => 'X'
   }.freeze
 
   EXTENDED_ATTRIBUTES = %w{

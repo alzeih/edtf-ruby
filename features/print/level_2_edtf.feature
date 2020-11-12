@@ -4,9 +4,9 @@ Feature: Print Date/Time objects as Level 2 EDTF strings
   
   @202 @level2
 	Scenario: Prints internal unspecified dates
-		When I parse the string "156u-12-25"
+		When I parse the string "156X-12-25"
 		When I convert the date
-		Then the EDTF string should be "156u-12-25"
+		Then the EDTF string should be "156X-12-25"
 
   @205 @level2 @interval
 	Scenario: Prints L2 extended intervals
@@ -14,9 +14,9 @@ Feature: Print Date/Time objects as Level 2 EDTF strings
 		# When I convert the date
 		# Then the EDTF string should be "2004-06-(01)~/2004-06-(20)~"
 
-		When I parse the string "2004-06-uu/2004-07-03"
+		When I parse the string "2004-06-XX/2004-07-03"
 		When I convert the date
-		Then the EDTF string should be "2004-06-uu/2004-07-03"
+		Then the EDTF string should be "2004-06-XX/2004-07-03"
 
   @209 @level2 @season
 	Scenario: Prints qualified seasons

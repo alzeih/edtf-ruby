@@ -1,7 +1,7 @@
 module EDTF
   class Unknown < ::Date::Infinity
     def edtf
-      'uuuu'
+      'XXXX'
     end
 
     alias to_s edtf

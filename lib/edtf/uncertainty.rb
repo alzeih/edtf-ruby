@@ -51,7 +51,7 @@ module EDTF
 
   class Unspecified < Struct.new(:year, :month, :day)
 
-    U = 'u'.freeze
+    U = 'X'.freeze
 
     def initialize
       super Array.new(4),Array.new(2), Array.new(2)

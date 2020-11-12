@@ -26,25 +26,25 @@ Feature: Print Date/Time objects as Level 1 EDTF strings
 		
 	@102 @level1
 	Scenario: Unspecified dates
-		When I parse the string "199u"
+		When I parse the string "199X"
 		When I convert the date
-		Then the EDTF string should be "199u"
+		Then the EDTF string should be "199X"
 
-		When I parse the string "19uu"
+		When I parse the string "19XX"
 		When I convert the date
-		Then the EDTF string should be "19uu"
+		Then the EDTF string should be "19XX"
 
-		When I parse the string "1999-uu"
+		When I parse the string "1999-XX"
 		When I convert the date
-		Then the EDTF string should be "1999-uu"
+		Then the EDTF string should be "1999-XX"
 
-		When I parse the string "1999-01-uu"
+		When I parse the string "1999-01-XX"
 		When I convert the date
-		Then the EDTF string should be "1999-01-uu"
+		Then the EDTF string should be "1999-01-XX"
 
-		When I parse the string "1999-uu-uu"
+		When I parse the string "1999-XX-XX"
 		When I convert the date
-		Then the EDTF string should be "1999-uu-uu"
+		Then the EDTF string should be "1999-XX-XX"
 
 	@103 @level1 @interval
 	Scenario: Prints L1 Extended Intervals
