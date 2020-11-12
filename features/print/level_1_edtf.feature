@@ -90,13 +90,13 @@ Feature: Print Date/Time objects as Level 1 EDTF strings
 
 	@104 @level1
 	Scenario: Prints years with more than four digits
-		When I parse the string "y170000002"
+		When I parse the string "Y170000002"
 		When I convert the date
-		Then the EDTF string should be "y170000002"
+		Then the EDTF string should be "Y170000002"
 
-		When I parse the string "y-170000002"
+		When I parse the string "Y-170000002"
 		When I convert the date
-		Then the EDTF string should be "y-170000002"
+		Then the EDTF string should be "Y-170000002"
 
 	@105 @level1 @season
 	Scenario: Prints seasons

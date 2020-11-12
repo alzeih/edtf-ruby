@@ -172,7 +172,7 @@ class Date
 
   # Returns the Date's EDTF string.
   def edtf
-    return "y#{year}" if long_year?
+    return "Y#{year}" if long_year?
 
     v = values
     s = FORMATS.take(v.length).zip(v).map { |f,d| f % d.abs }
