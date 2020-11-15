@@ -42,8 +42,8 @@ module EDTF
       end
 
       it 'parses uncertain approximate dates' do
-        expect(Parser.new.parse('1984?~')).to be_uncertain
-        expect(Parser.new.parse('1984?~')).to be_approximate
+        expect(Parser.new.parse('1984%')).to be_uncertain
+        expect(Parser.new.parse('1984%')).to be_approximate
       end
 
       it 'parses unspecified dates' do
@@ -103,8 +103,8 @@ module EDTF
 			end
 
 			it 'parses uncertain and approximate seasons' do
-        expect(Parser.new.parse!('2003-23?~')).to be_uncertain
-        expect(Parser.new.parse!('2003-23?~')).to be_approximate
+        expect(Parser.new.parse!('2003-23%')).to be_uncertain
+        expect(Parser.new.parse!('2003-23%')).to be_approximate
 			end
 			
 			
@@ -236,8 +236,8 @@ module EDTF
 				expect(d.approximate?(:day)).to be true
 			end
 
-			it 'parses "2004-?~06": year known, month within year is approximate and uncertain' do
-				d = Parser.new.parse!('2004-?~06')
+			it 'parses "2004-%06": year known, month within year is approximate and uncertain' do
+				d = Parser.new.parse!('2004-%06')
 								
 				expect(d.approximate?(:year)).to be false
 				expect(d.uncertain?(:year)).to be false
@@ -275,8 +275,8 @@ module EDTF
 				expect(d.uncertain?(:day)).to be false
 			end
 			
-			it 'parses "?2004-?~06": year uncertain and month is both uncertain and approximate' do
-				d = Parser.new.parse!('?2004-?~06')
+			it 'parses "?2004-%06": year uncertain and month is both uncertain and approximate' do
+				d = Parser.new.parse!('?2004-%06')
 				
 				expect(d.approximate?(:year)).to be false
 				expect(d.uncertain?(:year)).to be true
@@ -301,8 +301,8 @@ module EDTF
 				expect(d.uncertain?(:day)).to be false
 			end
 
-			it 'parses "2004~-?06-?~01": year and day approximate, month and day uncertain' do
-				d = Parser.new.parse!("2004~-?06-?~01")
+			it 'parses "2004~-?06-%01": year and day approximate, month and day uncertain' do
+				d = Parser.new.parse!("2004~-?06-%01")
 
 				expect(d.approximate?(:year)).to be true
 				expect(d.uncertain?(:year)).to be false
@@ -314,8 +314,8 @@ module EDTF
 				expect(d.uncertain?(:day)).to be true
 			end
 
-			it 'parses "2004~-?06-01?~": year and day approximate, month and day uncertain' do
-				d = Parser.new.parse!("2004~-?06-01?~")
+			it 'parses "2004~-?06-01%": year and day approximate, month and day uncertain' do
+				d = Parser.new.parse!("2004~-?06-01%")
 
 				expect(d.approximate?(:year)).to be true
 				expect(d.uncertain?(:year)).to be false

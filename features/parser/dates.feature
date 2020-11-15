@@ -50,7 +50,7 @@ Feature: EDTF parser parses date strings
     Scenarios: uncertain date examples from the specification
       | string      | year | month | day | uncertain | approximate |
       | 1984~       | 1984 | 1     | 1   | no        | yes         |
-      | 1984?~      | 1984 | 1     | 1   | yes       | yes         |
+      | 1984%       | 1984 | 1     | 1   | yes       | yes         |
 
   Scenario Outline: EDTF parses uncertain or approximate dates
     When I parse the string "<string>"
@@ -68,16 +68,16 @@ Feature: EDTF parser parses date strings
 	 | 2004-06~-11     	 | yes    | no     | yes     | no      | no    | no    |
 	 | 2004-?06-11   	 | no     | no     | no      | yes     | no    | no    |
 	 | 2004-06-~11   	 | no     | no     | no      | no      | yes   | no    |
-	 | 2004-?~06     	 | no     | no     | yes     | yes     | no    | no    |
+	 | 2004-%06     	 | no     | no     | yes     | yes     | no    | no    |
 	 | 2004-?06-?11   	 | no     | no     | no      | yes     | no    | yes   |
 	 | 2004?-06-~11  	 | no     | yes    | no      | no      | yes   | no    |
-	 | ?2004-?~06   	 | no     | yes    | yes     | yes     | no    | no    |
+	 | ?2004-%06    	 | no     | yes    | yes     | yes     | no    | no    |
 	 | 2004-06-~01   	 | no     | no     | no      | no      | yes   | no    |
-	 | ?2004-?~06-?~01	 | no     | yes    | yes     | yes     | yes   | yes   |
-	 | ~2004-?~06-~01	 | yes    | no     | yes     | yes     | yes   | no    |
+	 | ?2004-%06-%01	 | no     | yes    | yes     | yes     | yes   | yes   |
+	 | ~2004-%06-~01	 | yes    | no     | yes     | yes     | yes   | no    |
 	 | 2004-06?-~01 	 | no     | yes    | no      | yes     | yes   | no    |
 	 | 2004~-?06-01~ 	 | yes    | no     | no      | yes     | yes   | no    |
-	 | 2004~-?06-?~01 	 | yes    | no     | no      | yes     | yes   | yes   |
+	 | 2004~-?06-%01 	 | yes    | no     | no      | yes     | yes   | yes   |
 
 
 	Scenario: Invalid dates
