@@ -312,7 +312,10 @@ rule
     | pua_year_month     { result = val[0][0].month_precision! }
     | pua_year_month_day { result = val[0].day_precision! }
 
-  pua_year : year UA { result = uoa(Date.new(val[0]), val[1], :year) }
+  pua_year :
+    UA year { result = uoa(Date.new(val[1]), val[0], :year) }
+    | year UA { result = uoa(Date.new(val[0]), val[1], :year) }
+    | UA year UA { result = uoa(uoa(Date.new(val[1]), val[0], :year), val[2], :year) }
 
   pua_year_month :
     pua_year '-' month ua {
@@ -324,8 +327,20 @@ rule
     | year '-(' month ')' UA {
         result = [uoa(Date.new(val[0], val[2]), val[4], [:month]), true]
     }
+    | year '-' UA month  {
+        result = [uoa(Date.new(val[0], val[3]), val[2], [:month]), true]
+    }
+    | year '-' UA month UA  {
+        result = [uoa(uoa(Date.new(val[0], val[3]), val[2], [:month]), val[4], [:year, :month]), true]
+    }
     | pua_year '-(' month ')' UA {
         result = [uoa(val[0].change(:month => val[2]), val[4], [:month]), true]
+    }
+    | pua_year '-' UA month {
+        result = [uoa(val[0].change(:month => val[3]), val[2], [:month]), true]
+    }
+    | pua_year '-' UA month UA {
+        result = [uoa(uoa(val[0].change(:month => val[3]), val[2], [:month]), val[4], [:year, :month]), true]
     }
     ;
 
@@ -336,14 +351,29 @@ rule
     | pua_year_month '-(' day ')' UA {
         result = uoa(val[0][0].change(:day => val[2]), val[4], [:day])
     }
+    | pua_year_month '-' UA day {
+        result = uoa(val[0][0].change(:day => val[3]), val[2], [:day])
+    }
+    | pua_year_month '-' UA day UA {
+        result = uoa(uoa(val[0][0].change(:day => val[3]), val[2], [:day]), val[4], [:year, :month, :day])
+    }
     | year '-(' month ')' UA day ua {
         result = uoa(uoa(Date.new(val[0], val[2], val[5]), val[4], :month), val[6], :day)
+    }
+    | year '-' UA month day ua {
+        result = uoa(uoa(Date.new(val[0], val[3], val[4]), val[2], :month), val[5], :day)
     }
     | year_month '-' day UA {
         result = uoa(Date.new(val[0][0], val[0][1], val[2]), val[3])
     }
     | year_month '-(' day ')' UA {
         result = uoa(Date.new(val[0][0], val[0][1], val[2]), val[4], [:day])
+    }
+    | year_month '-' UA day {
+        result = uoa(Date.new(val[0][0], val[0][1], val[3]), val[2], [:day])
+    }
+    | year_month '-' UA day UA {
+        result = uoa(uoa(Date.new(val[0][0], val[0][1], val[3]), val[2], [:day]), val[4], [:year, :month, :day])
     }
     | year '-(' month '-' day ')' UA {
         result = uoa(Date.new(val[0], val[2], val[4]), val[6], [:month, :day])
