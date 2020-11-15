@@ -66,24 +66,24 @@ Feature: EDTF parser parses date strings
    | string          	 | ~-year | ?-year | ~-month | ?-month | ~-day | ?-day |
 	 | 2004?-06-11     	 | no     | yes    | no      | no      | no    | no    |
 	 | 2004-06~-11     	 | yes    | no     | yes     | no      | no    | no    |
-	 | 2004-(06)?-11   	 | no     | no     | no      | yes     | no    | no    |
-	 | 2004-06-(11)~   	 | no     | no     | no      | no      | yes   | no    |
-	 | 2004-(06)?~     	 | no     | no     | yes     | yes     | no    | no    |
-	 | 2004-(06-11)?   	 | no     | no     | no      | yes     | no    | yes   |
-	 | 2004?-06-(11)~  	 | no     | yes    | no      | no      | yes   | no    |
-	 | (2004-(06)~)?   	 | no     | yes    | yes     | yes     | no    | no    |
-	 | 2004-06-(01)~   	 | no     | no     | no      | no      | yes   | no    |
-	 | (2004-(06-01)~)?	 | no     | yes    | yes     | yes     | yes   | yes   |
-	 | (2004-(06)?-01)~	 | yes    | no     | yes     | yes     | yes   | no    |
-	 | 2004-06?-(01)~	   | no     | yes    | no      | yes     | yes   | no    |
-	 | 2004~-(06)?-01~   | yes    | no     | no      | yes     | yes   | no    |
-	 | 2004~-(06-(01)~)? | yes    | no     | no      | yes     | yes   | yes   |
+	 | 2004-?06-11   	 | no     | no     | no      | yes     | no    | no    |
+	 | 2004-06-~11   	 | no     | no     | no      | no      | yes   | no    |
+	 | 2004-?~06     	 | no     | no     | yes     | yes     | no    | no    |
+	 | 2004-?06-?11   	 | no     | no     | no      | yes     | no    | yes   |
+	 | 2004?-06-~11  	 | no     | yes    | no      | no      | yes   | no    |
+	 | ?2004-?~06   	 | no     | yes    | yes     | yes     | no    | no    |
+	 | 2004-06-~01   	 | no     | no     | no      | no      | yes   | no    |
+	 | ?2004-?~06-?~01	 | no     | yes    | yes     | yes     | yes   | yes   |
+	 | ~2004-?~06-~01	 | yes    | no     | yes     | yes     | yes   | no    |
+	 | 2004-06?-~01 	 | no     | yes    | no      | yes     | yes   | no    |
+	 | 2004~-?06-01~ 	 | yes    | no     | no      | yes     | yes   | no    |
+	 | 2004~-?06-?~01 	 | yes    | no     | no      | yes     | yes   | yes   |
 
 
 	Scenario: Invalid dates
 		When I parse the following strings an error should be raised:
 			| xyz           |
 			| x2009         |
-			| 2004-04-(1)?1 |
+			| 2004-04-1?1 	|
 		
 	
