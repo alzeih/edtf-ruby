@@ -65,12 +65,6 @@ module_eval(<<'...end parser.y/module_eval...', 'parser.y', 443)
       # ignore whitespace
     when @src.scan(/\(/)
       ['(', @src.matched]
-    # when @src.scan(/\)\?~-/)
-    #   [:PUA, [:uncertain!, :approximate!]]
-    # when @src.scan(/\)\?-/)
-    #   [:PUA, [:uncertain!]]
-    # when @src.scan(/\)~-/)
-    #   [:PUA, [:approximate!]]
     when @src.scan(/\)/)
       [')', @src.matched]
     when @src.scan(/\[/)
