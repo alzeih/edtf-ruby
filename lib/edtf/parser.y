@@ -304,10 +304,7 @@ rule
     ;
 
 
-  partial_uncertain_or_approximate : pua_base
-    | '(' pua_base ')' UA { result = uoa(val[1], val[3]) }
-
-  pua_base :
+  partial_uncertain_or_approximate :
     pua_year             { result = val[0].year_precision! }
     | pua_year_month     { result = val[0][0].month_precision! }
     | pua_year_month_day { result = val[0].day_precision! }
