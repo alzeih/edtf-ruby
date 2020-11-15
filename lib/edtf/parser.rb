@@ -79,7 +79,7 @@ module_eval(<<'...end parser.y/module_eval...', 'parser.y', 443)
       [:T, @src.matched]
     when @src.scan(/Z/)
       [:Z, @src.matched]
-    when @src.scan(/\?~/)
+    when @src.scan(/\%/)
       [:UA, [:uncertain!, :approximate!]]
     when @src.scan(/\?/)
       [:UA, [:uncertain!]]

@@ -507,7 +507,7 @@ require 'strscan'
       [:T, @src.matched]
     when @src.scan(/Z/)
       [:Z, @src.matched]
-    when @src.scan(/\?~/)
+    when @src.scan(/\%/)
       [:UA, [:uncertain!, :approximate!]]
     when @src.scan(/\?/)
       [:UA, [:uncertain!]]
