@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "edtf"
+
+SYMBOLS = ['', '?', '~', '?~']
+
+PREFIX = "Date.edtf!(\""
+SUFFIX = "\")"
+
+for i in SYMBOLS
+  for j in SYMBOLS
+    puts("#{PREFIX}#{i}2001#{j}#{SUFFIX}")
+
+    puts("#{PREFIX}#{i}2001#{j}-02#{SUFFIX}")
+    puts("#{PREFIX}2001-#{i}02#{j}#{SUFFIX}")
+    puts("#{PREFIX}#{i}2001#{j}-#{i}02#{j}#{SUFFIX}")
+
+    puts("#{PREFIX}#{i}2001#{j}-02-03#{SUFFIX}")
+    puts("#{PREFIX}2001-#{i}02#{j}-03#{SUFFIX}")
+    puts("#{PREFIX}2001-02-#{i}03#{j}#{SUFFIX}")
+
+    puts("#{PREFIX}#{i}2001#{j}-#{i}02#{j}-03#{SUFFIX}")
+    puts("#{PREFIX}#{i}2001#{j}-02-#{i}03#{j}#{SUFFIX}")
+    puts("#{PREFIX}2001-#{i}02#{j}-#{i}03#{j}#{SUFFIX}")
+
+    puts("#{PREFIX}#{i}2001#{j}-#{i}02#{j}-#{i}03#{j}#{SUFFIX}")
+  end
+end
